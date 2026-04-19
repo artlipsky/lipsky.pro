@@ -3,8 +3,48 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-html,
-body {
+@theme {
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --animate-drift-1: drift-1 6s ease-in-out infinite;
+  --animate-drift-2: drift-2 7s ease-in-out infinite;
+  --animate-drift-3: drift-3 9s ease-in-out infinite;
+}
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  33% { transform: translate(40vw, 30vh) scale(1.8); }
+  66% { transform: translate(-120vw, 10vh) scale(0.5); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-50vw, -40vh) scale(1.7); }
+  66% { transform: translate(20vw, -10vh) scale(0.5); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(60vw, -30vh) scale(2); }
+  66% { transform: translate(-30vw, -10vh) scale(0.6); }
+}
+
+html {
   background-color: var(--background);
+}
+
+body {
   color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
 }

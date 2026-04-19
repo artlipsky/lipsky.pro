@@ -1,10 +1,22 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Hello from "../components/Hello";
+import Background from "../components/Background.astro";
+import Logo from "../components/Logo.astro";
 ---
 
 <Layout>
-  <main class="flex min-h-screen items-center justify-center p-6">
-    <Hello client:load />
+  <Background />
+  <main class="flex flex-col justify-center items-center gap-10 p-8 min-h-screen text-center">
+    <div class="w-40 sm:w-56 md:w-60">
+      <Logo />
+    </div>
+    <div class="flex flex-col gap-4 max-w-2xl">
+      <h1 class="font-semibold text-3xl md:text-4xl text-balance">
+        The greatest developer, designer, and musician 
+      </h1>
+      <p class="text-muted text-base md:text-lg text-balance">
+        Also the most humble.
+      </p>
+    </div>
   </main>
 </Layout>
