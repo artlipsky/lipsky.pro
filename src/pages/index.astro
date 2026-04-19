@@ -1,0 +1,10 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hello from "../components/Hello";
+---
+
+<Layout>
+  <main class="flex min-h-screen items-center justify-center p-6">
+    <Hello client:load />
+  </main>
+</Layout>
