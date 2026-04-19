@@ -1,2 +1,2 @@
-# lipsky.pro
-Own Website
+# Art Lipsky
+Personal Website
