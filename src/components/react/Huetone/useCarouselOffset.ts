@@ -1,4 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { mod } from "../../../math/mod";
+import { NOTES_PER_OCTAVE } from "../Spectrum/types";
 
 interface Config {
   wheelMinInterval?: number;
@@ -9,11 +11,10 @@ interface Config {
 export function useCarouselOffset({
   wheelMinInterval = 80,
   normalizeDelay = 300,
-  modulo = 12,
+  modulo = NOTES_PER_OCTAVE,
 }: Config = {}) {
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(true);
-  const sectionRef = useRef<HTMLElement>(null);
   const lastTickRef = useRef(0);
   const normalizeTimerRef = useRef<number | null>(null);
 
@@ -33,7 +34,7 @@ export function useCarouselOffset({
     }
     normalizeTimerRef.current = window.setTimeout(() => {
       setAnimating(false);
-      setOffset((prev) => ((prev % modulo) + modulo) % modulo);
+      setOffset((prev) => mod(prev, modulo));
     }, normalizeDelay);
     return () => {
       if (normalizeTimerRef.current !== null) {
@@ -42,31 +43,29 @@ export function useCarouselOffset({
     };
   }, [offset, modulo, normalizeDelay]);
 
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    const onWheel = (e: WheelEvent) => {
+  const handleWheel = useCallback(
+    (e: WheelEvent) => {
       e.preventDefault();
       const now = Date.now();
       if (now - lastTickRef.current < wheelMinInterval) return;
       lastTickRef.current = now;
-      const step = e.deltaY > 0 ? 1 : -1;
+      const step = Math.sign(e.deltaY);
+      if (step === 0) return;
       setAnimating(true);
       setOffset((prev) => prev + step);
-    };
-    el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
-  }, [wheelMinInterval]);
+    },
+    [wheelMinInterval],
+  );
 
-  const shift = (delta: number) => {
+  const shift = useCallback((delta: number) => {
     setAnimating(true);
     setOffset((prev) => prev + delta);
-  };
+  }, []);
 
-  const jumpTo = (value: number) => {
+  const jumpTo = useCallback((value: number) => {
     setAnimating(false);
     setOffset(value);
-  };
+  }, []);
 
-  return { offset, animating, sectionRef, shift, jumpTo };
+  return { offset, animating, handleWheel, shift, jumpTo };
 }

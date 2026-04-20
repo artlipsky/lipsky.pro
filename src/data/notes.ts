@@ -14,3 +14,5 @@ export const notes = [
 ];
 
 export const flatNotes = notes.map((n) => n.split("/")[0]);
+
+export const DEFAULT_TONIC = flatNotes[0];

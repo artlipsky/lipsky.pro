@@ -4,6 +4,8 @@ export type Scale = {
   degrees: number[];
 };
 
+export const DEFAULT_SCALE_ID = "chromatic";
+
 export const scales: Scale[] = [
   {
     id: "chromatic",
