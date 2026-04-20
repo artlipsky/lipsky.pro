@@ -24,5 +24,8 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "@vitejs/plugin-react": "4.7.0"
   }
 }

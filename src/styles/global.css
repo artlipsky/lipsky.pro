@@ -7,9 +7,25 @@
   --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
 
-  --animate-drift-1: drift-1 6s ease-in-out infinite;
-  --animate-drift-2: drift-2 7s ease-in-out infinite;
-  --animate-drift-3: drift-3 9s ease-in-out infinite;
+  --blur-4xl: 7.5rem;
+
+  --animate-drift-1: drift-1 12s ease-in-out infinite;
+  --animate-drift-2: drift-2 14s ease-in-out infinite;
+  --animate-drift-3: drift-3 18s ease-in-out infinite;
+}
+
+@utility bg-noise {
+  background-image: url("/noise.svg");
+  background-size: 12.5rem;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @keyframes drift-1 {
