@@ -63,5 +63,10 @@ export function useCarouselOffset({
     setOffset((prev) => prev + delta);
   };
 
-  return { offset, animating, sectionRef, shift };
+  const jumpTo = (value: number) => {
+    setAnimating(false);
+    setOffset(value);
+  };
+
+  return { offset, animating, sectionRef, shift, jumpTo };
 }

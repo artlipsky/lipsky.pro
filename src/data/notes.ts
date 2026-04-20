@@ -12,3 +12,5 @@ export const notes = [
   "G",
   "Ab/G#",
 ];
+
+export const flatNotes = notes.map((n) => n.split("/")[0]);

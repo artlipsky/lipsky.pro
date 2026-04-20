@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ListBox, ListBoxItem, Select } from "@heroui/react";
 import { spectrum } from "../data/spectrum";
-import { notes } from "../data/notes";
+import { notes, flatNotes } from "../data/notes";
 import { scales } from "../data/scales";
 import { useCarouselOffset } from "../hooks/useCarouselOffset";
 
@@ -20,12 +20,45 @@ const STRIP_CENTER = CONFIG.stripSlots / 2;
 
 export default function Spectrum({ className }: Props) {
   const [scaleId, setScaleId] = useState("chromatic");
-  const { offset, animating, sectionRef, shift } = useCarouselOffset({
+  const { offset, animating, sectionRef, shift, jumpTo } = useCarouselOffset({
     wheelMinInterval: CONFIG.wheelMinInterval,
     normalizeDelay: CONFIG.normalizeDelay,
   });
+  const syncedFromUrlRef = useRef(false);
 
   const scale = scales.find((s) => s.id === scaleId) ?? scales[0];
+
+  useEffect(() => {
+    if (syncedFromUrlRef.current) return;
+    syncedFromUrlRef.current = true;
+    const params = new URLSearchParams(window.location.search);
+    const tonic = params.get("tonic");
+    const scaleParam = params.get("scale");
+    if (tonic) {
+      const idx = flatNotes.indexOf(tonic);
+      if (idx > 0) jumpTo(idx);
+    }
+    if (scaleParam && scales.some((s) => s.id === scaleParam)) {
+      setScaleId(scaleParam);
+    }
+  }, [jumpTo]);
+
+  useEffect(() => {
+    if (!syncedFromUrlRef.current) return;
+    const timer = window.setTimeout(() => {
+      const tonicIdx = ((offset % 12) + 12) % 12;
+      const tonic = flatNotes[tonicIdx];
+      const params = new URLSearchParams();
+      if (tonic !== flatNotes[0]) params.set("tonic", tonic);
+      if (scaleId !== "chromatic") params.set("scale", scaleId);
+      const query = params.toString();
+      const url = query
+        ? `${window.location.pathname}?${query}`
+        : window.location.pathname;
+      window.history.replaceState(null, "", url);
+    }, 400);
+    return () => window.clearTimeout(timer);
+  }, [offset, scaleId]);
 
   return (
     <section
