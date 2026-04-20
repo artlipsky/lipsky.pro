@@ -1,0 +1,31 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Background from "../components/Background.astro";
+import Spectrum from "../components/Spectrum";
+---
+
+<Layout
+  title="Huetone — tonality through color"
+  description="An interactive color map of the 12-tone chromatic scale. Click any note to set it as the tonic, pick a mode, and see which degrees belong to the scale."
+>
+  <Background />
+  <main class="flex flex-col justify-center items-center gap-8 md:gap-12 p-4 md:p-8 min-h-screen">
+    <div class="flex flex-col items-center gap-4 max-w-3xl text-center">
+      <h1 class="font-semibold text-3xl md:text-6xl text-balance">
+        Huetone
+      </h1>
+      <p class="text-muted text-base md:text-lg text-balance">
+        A theory of tonality, mapped through the language of color.
+      </p>
+    </div>
+
+    <Spectrum className="max-w-5xl" client:load />
+
+    <a
+      href="/"
+      class="text-muted hover:text-foreground text-sm underline underline-offset-4 transition-colors"
+    >
+      ← lipsky.pro
+    </a>
+  </main>
+</Layout>
