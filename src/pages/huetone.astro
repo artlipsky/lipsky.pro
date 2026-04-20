@@ -14,12 +14,31 @@ import { HuetoneStage } from "../components/react/Huetone";
       <h1 class="font-semibold text-3xl md:text-6xl text-balance">
         Huetone
       </h1>
-      <p class="text-muted text-base md:text-lg text-balance">
+      <h2 class="text-xl md:text-2xl text-balance">
         A theory of tonality, mapped through the language of color.
+      </h2>
+      <p class="text-muted text-sm md:text-base text-balance">
+        Pick a mode, click any colour to set it as the tonic, scroll the line or
+        the ring to shift through keys.
       </p>
     </div>
 
     <HuetoneStage client:load />
+
+    <section class="flex flex-col gap-4 max-w-2xl text-muted text-base md:text-lg leading-relaxed">
+      <p>
+        Each scale degree is bound to a fixed hue, and the colour wheel walks
+        around the octave the same way harmonic function does. Shift the tonic
+        and the pitches slide to new positions, but each degree keeps its
+        colour.
+      </p>
+      <p>
+        Because colours stay tied to function, every scale gets a recognisable
+        colour signature you can spot across any key — the in-scale degrees
+        light up while the rest fade. The line reads as sequence, the ring as
+        cycle: two views of the same structure.
+      </p>
+    </section>
 
     <a
       href="/"

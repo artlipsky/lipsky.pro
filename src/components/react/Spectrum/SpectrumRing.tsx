@@ -3,6 +3,7 @@ import { spectrum } from "../../../data/spectrum";
 import RingClip from "./RingClip";
 import RingDegreesLayer from "./RingDegreesLayer";
 import RingNotesLayer from "./RingNotesLayer";
+import SpectrumLabel from "./SpectrumLabel";
 import SpectrumWedge from "./SpectrumWedge";
 import { RING_CONFIG, RING_VIEWBOX, wedgePath } from "./ringGeometry";
 import { ANGLE_PER_NOTE, transformTransition, type SpectrumViewProps } from "./types";
@@ -14,6 +15,7 @@ export default function SpectrumRing({
   inScale,
   onShiftBy,
   onWheel,
+  label,
   className,
 }: SpectrumViewProps) {
   const rotationDeg = offset * ANGLE_PER_NOTE;
@@ -43,6 +45,12 @@ export default function SpectrumRing({
 
       <RingNotesLayer clipPathId={clipPathId} rotationDeg={rotationDeg} transition={transition} />
       <RingDegreesLayer />
+
+      {label && (
+        <div className="absolute inset-0 flex justify-center items-center px-8 pointer-events-none">
+          <SpectrumLabel>{label}</SpectrumLabel>
+        </div>
+      )}
     </WheelArea>
   );
 }

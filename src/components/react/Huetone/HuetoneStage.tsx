@@ -38,7 +38,7 @@ export default function HuetoneStage({ className }: Props) {
 
       <div className="flex flex-col items-center gap-16 w-full">
         <SpectrumLine offset={offset} animating={animating} inScale={inScale} onShiftBy={shift} onWheel={handleWheel} className="max-w-5xl" />
-        <SpectrumRing offset={offset} animating={animating} inScale={inScale} onShiftBy={shift} onWheel={handleWheel} />
+        <SpectrumRing offset={offset} animating={animating} inScale={inScale} onShiftBy={shift} onWheel={handleWheel} label={scale.name} />
       </div>
     </section>
   );

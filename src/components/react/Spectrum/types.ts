@@ -4,6 +4,7 @@ export interface SpectrumViewProps {
   inScale: (degreeIndex: number) => boolean;
   onShiftBy: (delta: number) => void;
   onWheel?: (e: WheelEvent) => void;
+  label?: string;
   className?: string;
 }
 
