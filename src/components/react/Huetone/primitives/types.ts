@@ -1,7 +1,7 @@
-export interface SpectrumViewProps {
+export interface ViewProps {
   offset: number;
   animating: boolean;
-  inScale: (degreeIndex: number) => boolean;
+  inScale?: (degreeIndex: number) => boolean;
   onShiftBy: (delta: number) => void;
   onWheel?: (e: WheelEvent) => void;
   label?: string;
@@ -11,9 +11,6 @@ export interface SpectrumViewProps {
 export const SPECTRUM_TRANSITION_MS = 450;
 export const NOTES_PER_OCTAVE = 12;
 export const ANGLE_PER_NOTE = 360 / NOTES_PER_OCTAVE;
-export const STRIP_OCTAVES = 4;
-export const STRIP_SLOTS = NOTES_PER_OCTAVE * STRIP_OCTAVES;
-export const STRIP_CENTER = STRIP_SLOTS / 2;
 
 export const transformTransition = (animating: boolean) =>
   animating ? `transform ${SPECTRUM_TRANSITION_MS}ms ease-out` : "none";

@@ -1,19 +1,18 @@
-import { notes } from "../../../data/notes";
-import type { SpectrumDegree } from "../../../data/spectrum";
-import { mod } from "../../../math/mod";
-import DegreeLabel from "./DegreeLabel";
-import NoteLabel from "./NoteLabel";
+import { notes } from "../data/notes";
+import type { Degree } from "../data/spectrum";
+import { mod } from "../../../../math/mod";
+import DegreeLabel from "../primitives/DegreeLabel";
+import NoteLabel from "../primitives/NoteLabel";
 import {
   HOVER_DIM_GROUP,
   INACTIVE_BG_CLASS,
   NOTES_PER_OCTAVE,
-  STRIP_CENTER,
-  STRIP_SLOTS,
   transformTransition,
-} from "./types";
+} from "../primitives/types";
+import { STRIP_CENTER, STRIP_SLOTS } from "./stripConstants";
 
 interface Props {
-  step: SpectrumDegree;
+  step: Degree;
   index: number;
   offset: number;
   animating: boolean;

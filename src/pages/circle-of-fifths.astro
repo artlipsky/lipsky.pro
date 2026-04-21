@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BackLink from "../components/astro/BackLink.astro";
+import { CircleOfFifthsStage } from "../components/react/Huetone";
 ---
 
 <Layout
@@ -20,6 +21,8 @@ import BackLink from "../components/astro/BackLink.astro";
         Closely related keys sit side by side; distant keys stand across.
       </p>
     </div>
+
+    <CircleOfFifthsStage client:load />
 
     <BackLink />
   </main>

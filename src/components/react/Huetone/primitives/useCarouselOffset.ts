@@ -1,17 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { mod } from "../../../math/mod";
-import { NOTES_PER_OCTAVE } from "../Spectrum/types";
+import { mod } from "../../../../math/mod";
+import { NOTES_PER_OCTAVE } from "./types";
 
 interface Config {
   wheelMinInterval?: number;
   normalizeDelay?: number;
   modulo?: number;
+  stepSize?: number;
 }
 
 export function useCarouselOffset({
   wheelMinInterval = 80,
   normalizeDelay = 300,
   modulo = NOTES_PER_OCTAVE,
+  stepSize = 1,
 }: Config = {}) {
   const [offset, setOffset] = useState(0);
   const [animating, setAnimating] = useState(true);
@@ -49,12 +51,12 @@ export function useCarouselOffset({
       const now = Date.now();
       if (now - lastTickRef.current < wheelMinInterval) return;
       lastTickRef.current = now;
-      const step = Math.sign(e.deltaY);
-      if (step === 0) return;
+      const direction = Math.sign(e.deltaY);
+      if (direction === 0) return;
       setAnimating(true);
-      setOffset((prev) => prev + step);
+      setOffset((prev) => prev + direction * stepSize);
     },
-    [wheelMinInterval],
+    [wheelMinInterval, stepSize],
   );
 
   const shift = useCallback((delta: number) => {

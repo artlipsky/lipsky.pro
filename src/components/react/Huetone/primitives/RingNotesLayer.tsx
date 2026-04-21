@@ -1,4 +1,4 @@
-import { notes } from "../../../data/notes";
+import { notes } from "../data/notes";
 import NoteLabel from "./NoteLabel";
 import { polarPercent, RING_CONFIG, RING_START_ANGLE } from "./ringGeometry";
 import { ANGLE_PER_NOTE } from "./types";
@@ -7,18 +7,25 @@ interface Props {
   clipPathId: string;
   rotationDeg: number;
   transition: string;
+  positionOf?: (noteIndex: number) => number;
 }
 
-export default function RingNotesLayer({ clipPathId, rotationDeg, transition }: Props) {
+export default function RingNotesLayer({
+  clipPathId,
+  rotationDeg,
+  transition,
+  positionOf = (j) => j,
+}: Props) {
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ clipPath: `url(#${clipPathId})` }}>
-      <div className="absolute inset-0" style={{ transform: `rotate(${-rotationDeg}deg)`, transition }}>
+      <div className="absolute inset-0 pointer-events-none" style={{ transform: `rotate(${-rotationDeg}deg)`, transition }}>
         {notes.map((note, j) => {
-          const { x, y } = polarPercent(RING_START_ANGLE + j * ANGLE_PER_NOTE, RING_CONFIG.textR);
+          const angularIdx = positionOf(j);
+          const { x, y } = polarPercent(RING_START_ANGLE + angularIdx * ANGLE_PER_NOTE, RING_CONFIG.textR);
           return (
             <div
               key={j}
-              className="absolute"
+              className="absolute pointer-events-none"
               style={{
                 left: `${x}%`,
                 top: `${y}%`,

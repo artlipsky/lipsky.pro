@@ -1,15 +1,15 @@
-import type { SpectrumDegree } from "../../../data/spectrum";
+import type { Degree } from "../data/spectrum";
 import { HOVER_DIM, INACTIVE_FILL_VAR } from "./types";
 
 interface Props {
-  step: SpectrumDegree;
+  step: Degree;
   path: string;
   active: boolean;
   strokeWidth: number;
   onClick: () => void;
 }
 
-export default function SpectrumWedge({ step, path, active, strokeWidth, onClick }: Props) {
+export default function Wedge({ step, path, active, strokeWidth, onClick }: Props) {
   const fill = active ? `var(--color-${step.color}-500)` : INACTIVE_FILL_VAR;
   return (
     <path

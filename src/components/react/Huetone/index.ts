@@ -1,1 +1,3 @@
-export { default as HuetoneStage } from "./HuetoneStage";
+export { SpectrumLineStage } from "./SpectrumLine";
+export { SpectrumRingStage } from "./SpectrumRing";
+export { CircleOfFifthsStage } from "./CircleOfFifths";

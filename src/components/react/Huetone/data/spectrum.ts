@@ -1,4 +1,4 @@
-export type SpectrumDegree = {
+export type Degree = {
   degree: string;
   name: string;
   color: string;
@@ -7,7 +7,7 @@ export type SpectrumDegree = {
   border: string;
 };
 
-export const spectrum: SpectrumDegree[] = [
+export const spectrum: Degree[] = [
   { degree: "1",  name: "Tonic",            color: "red",     bg: "bg-red-500",     text: "text-red-500",     border: "border-red-500" },
   { degree: "2b", name: "Flat Supertonic",  color: "orange",  bg: "bg-orange-500",  text: "text-orange-500",  border: "border-orange-500" },
   { degree: "2",  name: "Supertonic",       color: "yellow",  bg: "bg-yellow-500",  text: "text-yellow-500",  border: "border-yellow-500" },

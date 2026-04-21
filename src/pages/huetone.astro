@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import BackLink from "../components/astro/BackLink.astro";
-import { HuetoneStage } from "../components/react/Huetone";
+import { SpectrumLineStage, SpectrumRingStage } from "../components/react/Huetone";
 
 const formulaClasses = "bg-foreground/10 mx-0.5 px-1.5 py-0.5 rounded font-mono text-foreground tabular-nums";
 ---
@@ -24,7 +24,8 @@ const formulaClasses = "bg-foreground/10 mx-0.5 px-1.5 py-0.5 rounded font-mono 
       </p>
     </div>
 
-    <HuetoneStage client:load />
+    <SpectrumLineStage client:load />
+    <SpectrumRingStage client:load />
 
     <section class="flex flex-col gap-4 max-w-2xl text-muted text-base md:text-lg leading-relaxed">
       <p>

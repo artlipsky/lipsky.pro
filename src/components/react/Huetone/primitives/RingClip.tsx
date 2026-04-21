@@ -1,4 +1,4 @@
-import { spectrum } from "../../../data/spectrum";
+import { spectrum } from "../data/spectrum";
 import { wedgePath } from "./ringGeometry";
 
 interface Props {
