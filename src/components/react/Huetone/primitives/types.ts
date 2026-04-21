@@ -1,3 +1,5 @@
+export type Mode = "major" | "minor";
+
 export interface ViewProps {
   offset: number;
   animating: boolean;

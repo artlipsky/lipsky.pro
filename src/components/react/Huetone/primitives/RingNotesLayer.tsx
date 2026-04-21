@@ -8,6 +8,8 @@ interface Props {
   rotationDeg: number;
   transition: string;
   positionOf?: (noteIndex: number) => number;
+  radius?: number;
+  label?: (noteIndex: number) => string;
 }
 
 export default function RingNotesLayer({
@@ -15,13 +17,15 @@ export default function RingNotesLayer({
   rotationDeg,
   transition,
   positionOf = (j) => j,
+  radius = RING_CONFIG.textR,
+  label = (j) => notes[j],
 }: Props) {
   return (
     <div className="absolute inset-0 pointer-events-none" style={{ clipPath: `url(#${clipPathId})` }}>
       <div className="absolute inset-0 pointer-events-none" style={{ transform: `rotate(${-rotationDeg}deg)`, transition }}>
-        {notes.map((note, j) => {
+        {notes.map((_, j) => {
           const angularIdx = positionOf(j);
-          const { x, y } = polarPercent(RING_START_ANGLE + angularIdx * ANGLE_PER_NOTE, RING_CONFIG.textR);
+          const { x, y } = polarPercent(RING_START_ANGLE + angularIdx * ANGLE_PER_NOTE, radius);
           return (
             <div
               key={j}
@@ -33,7 +37,7 @@ export default function RingNotesLayer({
                 transition,
               }}
             >
-              <NoteLabel note={note} />
+              <NoteLabel note={label(j)} />
             </div>
           );
         })}

@@ -1,6 +1,15 @@
+import { useState } from "react";
 import { mod } from "../../../../math/mod";
+import {
+  chromaticFromFifthsOffset,
+  fifthsOffsetFromChromatic,
+  FIFTH_SEMITONES,
+  RELATIVE_MAJOR_SHIFT,
+  RELATIVE_MINOR_SHIFT,
+} from "../primitives/intervals";
+import ModeSelect from "../primitives/ModeSelect";
 import TonicSelect from "../primitives/TonicSelect";
-import { NOTES_PER_OCTAVE } from "../primitives/types";
+import { NOTES_PER_OCTAVE, type Mode } from "../primitives/types";
 import { useCarouselOffset } from "../primitives/useCarouselOffset";
 import CircleOfFifthsRing from "./CircleOfFifthsRing";
 
@@ -8,16 +17,37 @@ interface Props {
   className?: string;
 }
 
-const FIFTH_SEMITONES = 7;
-
 export default function CircleOfFifthsStage({ className }: Props) {
+  const [mode, setMode] = useState<Mode>("major");
   const { offset, animating, handleWheel, shift, jumpTo } = useCarouselOffset();
-  const tonicIndex = mod(offset * FIFTH_SEMITONES, NOTES_PER_OCTAVE);
+  const tonicIndex = chromaticFromFifthsOffset(offset);
+
+  const handleTonicChange = (idx: number) => {
+    jumpTo(fifthsOffsetFromChromatic(idx));
+  };
+
+  const handleInnerClick = (i: number) => {
+    const outerAtI = mod((i + offset) * FIFTH_SEMITONES, NOTES_PER_OCTAVE);
+    const relativeShift = mode === "major" ? RELATIVE_MINOR_SHIFT : RELATIVE_MAJOR_SHIFT;
+    const newTonic = mod(outerAtI + relativeShift, NOTES_PER_OCTAVE);
+    jumpTo(fifthsOffsetFromChromatic(newTonic));
+    setMode(mode === "major" ? "minor" : "major");
+  };
 
   return (
     <section className={`flex flex-col items-center gap-16 w-full ${className ?? ""}`}>
-      <TonicSelect value={tonicIndex} onChange={(idx) => jumpTo(mod(idx * FIFTH_SEMITONES, NOTES_PER_OCTAVE))} />
-      <CircleOfFifthsRing offset={offset} animating={animating} onShiftBy={shift} onWheel={handleWheel} />
+      <div className="flex items-center gap-2">
+        <TonicSelect value={tonicIndex} onChange={handleTonicChange} />
+        <ModeSelect value={mode} onChange={setMode} />
+      </div>
+      <CircleOfFifthsRing
+        offset={offset}
+        animating={animating}
+        mode={mode}
+        onShiftBy={shift}
+        onInnerClick={handleInnerClick}
+        onWheel={handleWheel}
+      />
     </section>
   );
 }

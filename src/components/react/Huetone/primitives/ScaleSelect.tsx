@@ -1,32 +1,21 @@
-import { ListBox, ListBoxItem, Select } from "@heroui/react";
 import { scales } from "../data/scales";
+import Dropdown, { type DropdownItem } from "./Dropdown";
 
 interface Props {
   value: string;
   onChange: (value: string) => void;
 }
 
+const items: DropdownItem[] = scales.map((s) => ({ id: s.id, label: s.name }));
+
 export default function ScaleSelect({ value, onChange }: Props) {
   return (
-    <Select
-      className="w-full max-w-60 md:max-w-72 whitespace-nowrap"
-      aria-label="Scale"
+    <Dropdown
+      items={items}
       value={value}
-      onChange={(key) => onChange(String(key))}
-    >
-      <Select.Trigger>
-        <Select.Value className="truncate whitespace-nowrap" />
-        <Select.Indicator />
-      </Select.Trigger>
-      <Select.Popover className="max-h-80 no-scrollbar">
-        <ListBox items={scales}>
-          {(item) => (
-            <ListBoxItem id={item.id} textValue={item.name}>
-              {item.name}
-            </ListBoxItem>
-          )}
-        </ListBox>
-      </Select.Popover>
-    </Select>
+      onChange={onChange}
+      ariaLabel="Scale"
+      maxWidth="max-w-60 md:max-w-72"
+    />
   );
 }

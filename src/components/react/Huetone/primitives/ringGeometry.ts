@@ -2,6 +2,8 @@ import { ANGLE_PER_NOTE } from "./types";
 
 const outerR = 170;
 const innerR = 110;
+const innerWedgeOuterR = 95;
+const innerWedgeInnerR = 35;
 const labelMargin = 40;
 
 export const RING_CONFIG = {
@@ -9,9 +11,14 @@ export const RING_CONFIG = {
   innerR,
   textR: (outerR + innerR) / 2,
   labelR: outerR + labelMargin,
+  innerWedgeOuterR,
+  innerWedgeInnerR,
+  innerTextR: (innerWedgeOuterR + innerWedgeInnerR) / 2,
   viewBox: 400,
   uniformGap: 18,
+  innerUniformGap: 12,
   cornerStroke: 14,
+  innerCornerStroke: 8,
 } as const;
 
 export const RING_START_ANGLE = -90;
@@ -23,14 +30,29 @@ const UNIT_PRECISION = 2;
 
 const degToRad = (d: number) => (d * Math.PI) / 180;
 
-export function wedgePath(i: number, bbox = false): string {
-  const expand = bbox ? RING_CONFIG.cornerStroke / 2 : 0;
+interface WedgePathOptions {
+  bbox?: boolean;
+  outerR?: number;
+  innerR?: number;
+  cornerStroke?: number;
+  uniformGap?: number;
+}
+
+export function wedgePath(i: number, options: WedgePathOptions = {}): string {
+  const {
+    bbox = false,
+    outerR: Ro0 = RING_CONFIG.outerR,
+    innerR: Ri0 = RING_CONFIG.innerR,
+    cornerStroke = RING_CONFIG.cornerStroke,
+    uniformGap = RING_CONFIG.uniformGap,
+  } = options;
+  const expand = bbox ? cornerStroke / 2 : 0;
   const half = ANGLE_PER_NOTE / 2;
   const s = degToRad(RING_START_ANGLE - half + i * ANGLE_PER_NOTE);
   const e = degToRad(RING_START_ANGLE - half + (i + 1) * ANGLE_PER_NOTE);
-  const Ro = RING_CONFIG.outerR + expand;
-  const Ri = Math.max(0, RING_CONFIG.innerR - expand);
-  const d = Math.max(0, RING_CONFIG.uniformGap / 2 - expand);
+  const Ro = Ro0 + expand;
+  const Ri = Math.max(0, Ri0 - expand);
+  const d = Math.max(0, uniformGap / 2 - expand);
   const tOuter = Math.sqrt(Ro * Ro - d * d);
   const tInner = Math.sqrt(Ri * Ri - d * d);
 
