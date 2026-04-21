@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BackLink from "../components/astro/BackLink.astro";
+---
+
+<Layout
+  title="Circle of Fifths — harmony through geometry"
+  description="An interactive map of the twelve pitches arranged by perfect fifths. Closely related keys stand side by side; distant keys stand across."
+>
+  <main class="flex flex-col justify-center items-center gap-16 p-4 md:p-8 min-h-screen">
+    <div class="flex flex-col items-center gap-4 max-w-3xl text-center">
+      <h1 class="font-semibold text-3xl md:text-6xl text-balance">
+        Circle of Fifths
+      </h1>
+      <h2 class="text-xl md:text-2xl text-balance">
+        The geometry of harmony, traced by perfect fifths.
+      </h2>
+      <p class="text-muted text-sm md:text-base text-balance">
+        Twelve pitches arranged around a circle, each a perfect fifth apart.
+        Closely related keys sit side by side; distant keys stand across.
+      </p>
+    </div>
+
+    <BackLink />
+  </main>
+</Layout>
