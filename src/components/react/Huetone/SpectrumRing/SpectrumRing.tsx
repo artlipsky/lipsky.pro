@@ -1,15 +1,16 @@
 import { useId } from "react";
-import { spectrum } from "../data/spectrum";
-import RingClip from "../primitives/RingClip";
-import RingDegreesLayer from "../primitives/RingDegreesLayer";
-import RingNotesLayer from "../primitives/RingNotesLayer";
-import ViewLabel from "../primitives/ViewLabel";
-import Wedge from "../primitives/Wedge";
-import { RING_CONFIG, RING_VIEWBOX, wedgePath } from "../primitives/ringGeometry";
-import { ANGLE_PER_NOTE, transformTransition, type ViewProps } from "../primitives/types";
-import WheelArea from "../primitives/WheelArea";
+import RingClip from "../ring/RingClip";
+import RingDegreesLayer from "../ring/RingDegreesLayer";
+import RingNotesLayer from "../ring/RingNotesLayer";
+import { ANGLE_PER_NOTE, RING_CONFIG, RING_VIEWBOX, wedgePath } from "../ring/ringGeometry";
+import { transformTransition } from "../theme";
+import type { ViewProps } from "../types";
+import ViewLabel from "../ui/ViewLabel";
+import Wedge from "../ui/Wedge";
+import WheelArea from "../ui/WheelArea";
 
 export default function SpectrumRing({
+  spectrum,
   offset,
   animating,
   inScale,
@@ -45,7 +46,7 @@ export default function SpectrumRing({
       </svg>
 
       <RingNotesLayer clipPathId={clipPathId} rotationDeg={rotationDeg} transition={transition} />
-      <RingDegreesLayer />
+      <RingDegreesLayer info={spectrum} />
 
       {label && (
         <div className="absolute inset-0 flex justify-center items-center px-8 pointer-events-none">

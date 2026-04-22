@@ -1,19 +1,20 @@
-import { spectrum } from "../data/spectrum";
-import DegreeLabel from "./DegreeLabel";
-import { polarPercent, RING_CONFIG, RING_START_ANGLE } from "./ringGeometry";
-import { ANGLE_PER_NOTE, NOTES_PER_OCTAVE } from "./types";
+import type { DegreeInfo } from "../data/degrees";
+import { NOTES_PER_OCTAVE } from "../data/intervals";
+import DegreeLabel from "../ui/DegreeLabel";
+import { ANGLE_PER_NOTE, polarPercent, RING_CONFIG, RING_START_ANGLE } from "./ringGeometry";
 
 interface Props {
+  info: readonly DegreeInfo[];
   order?: readonly number[];
 }
 
 const CHROMATIC_ORDER = Array.from({ length: NOTES_PER_OCTAVE }, (_, i) => i);
 
-export default function RingDegreesLayer({ order = CHROMATIC_ORDER }: Props = {}) {
+export default function RingDegreesLayer({ info, order = CHROMATIC_ORDER }: Props) {
   return (
     <>
       {order.map((degreeIdx, i) => {
-        const step = spectrum[degreeIdx];
+        const step = info[degreeIdx];
         const { x, y } = polarPercent(RING_START_ANGLE + i * ANGLE_PER_NOTE, RING_CONFIG.labelR);
         return (
           <div

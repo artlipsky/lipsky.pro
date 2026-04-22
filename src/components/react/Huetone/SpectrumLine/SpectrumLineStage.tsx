@@ -1,4 +1,4 @@
-import ScaleStage from "../primitives/ScaleStage";
+import ScaleStage from "../ui/ScaleStage";
 import SpectrumLine from "./SpectrumLine";
 
 interface Props {

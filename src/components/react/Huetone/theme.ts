@@ -1,18 +1,4 @@
-export type Mode = "major" | "minor";
-
-export interface ViewProps {
-  offset: number;
-  animating: boolean;
-  inScale?: (degreeIndex: number) => boolean;
-  onShiftBy: (delta: number) => void;
-  onWheel?: (e: WheelEvent) => void;
-  label?: string;
-  className?: string;
-}
-
 export const SPECTRUM_TRANSITION_MS = 450;
-export const NOTES_PER_OCTAVE = 12;
-export const ANGLE_PER_NOTE = 360 / NOTES_PER_OCTAVE;
 
 export const transformTransition = (animating: boolean) =>
   animating ? `transform ${SPECTRUM_TRANSITION_MS}ms ease-out` : "none";

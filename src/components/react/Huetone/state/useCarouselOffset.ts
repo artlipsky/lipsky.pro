@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { mod } from "../../../../math/mod";
-import { NOTES_PER_OCTAVE } from "./types";
+import { NOTES_PER_OCTAVE } from "../data/intervals";
 
 interface Config {
   wheelMinInterval?: number;

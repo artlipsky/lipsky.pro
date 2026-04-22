@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { mod } from "../../../../math/mod";
+import { CHORD_INFO } from "../data/degrees";
 import {
   chromaticFromFifthsOffset,
   fifthsOffsetFromChromatic,
   FIFTH_SEMITONES,
+  NOTES_PER_OCTAVE,
   RELATIVE_MAJOR_SHIFT,
   RELATIVE_MINOR_SHIFT,
-} from "../primitives/intervals";
-import ModeSelect from "../primitives/ModeSelect";
-import TonicSelect from "../primitives/TonicSelect";
-import { NOTES_PER_OCTAVE, type Mode } from "../primitives/types";
-import { useCarouselOffset } from "../primitives/useCarouselOffset";
+} from "../data/intervals";
+import { useCarouselOffset } from "../state/useCarouselOffset";
+import { usePalette } from "../state/usePalette";
+import type { Mode } from "../types";
+import ModeSelect from "../ui/ModeSelect";
+import PaletteSelect from "../ui/PaletteSelect";
+import TonicSelect from "../ui/TonicSelect";
 import CircleOfFifthsRing from "./CircleOfFifthsRing";
 
 interface Props {
@@ -19,6 +23,7 @@ interface Props {
 
 export default function CircleOfFifthsStage({ className }: Props) {
   const [mode, setMode] = useState<Mode>("major");
+  const { paletteId, setPaletteId, spectrum } = usePalette(CHORD_INFO);
   const { offset, animating, handleWheel, shift, jumpTo } = useCarouselOffset();
   const tonicIndex = chromaticFromFifthsOffset(offset);
 
@@ -39,8 +44,10 @@ export default function CircleOfFifthsStage({ className }: Props) {
       <div className="flex items-center gap-2">
         <TonicSelect value={tonicIndex} onChange={handleTonicChange} />
         <ModeSelect value={mode} onChange={setMode} />
+        <PaletteSelect value={paletteId} onChange={setPaletteId} />
       </div>
       <CircleOfFifthsRing
+        spectrum={spectrum}
         offset={offset}
         animating={animating}
         mode={mode}

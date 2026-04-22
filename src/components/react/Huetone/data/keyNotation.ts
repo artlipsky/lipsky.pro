@@ -1,7 +1,6 @@
 import { mod } from "../../../../math/mod";
-import { notes } from "../data/notes";
-import { FIFTH_SEMITONES, RELATIVE_MAJOR_SHIFT } from "./intervals";
-import { NOTES_PER_OCTAVE } from "./types";
+import { FIFTH_SEMITONES, NOTES_PER_OCTAVE, RELATIVE_MAJOR_SHIFT } from "./intervals";
+import { notes } from "./notes";
 
 const C_CHROMATIC = 3;
 const SHARP_SIDE_MAX = 6;

@@ -1,10 +1,10 @@
-import { spectrum } from "../data/spectrum";
-import ViewLabel from "../primitives/ViewLabel";
-import { NOTES_PER_OCTAVE, type ViewProps } from "../primitives/types";
-import WheelArea from "../primitives/WheelArea";
+import { NOTES_PER_OCTAVE } from "../data/intervals";
+import type { ViewProps } from "../types";
+import ViewLabel from "../ui/ViewLabel";
+import WheelArea from "../ui/WheelArea";
 import SpectrumTile from "./SpectrumTile";
 
-export default function SpectrumLine({ offset, animating, inScale, onShiftBy, onWheel, label, className }: ViewProps) {
+export default function SpectrumLine({ spectrum, offset, animating, inScale, onShiftBy, onWheel, label, className }: ViewProps) {
   const isActive = inScale ?? (() => true);
 
   return (

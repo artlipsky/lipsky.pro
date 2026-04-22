@@ -1,4 +1,6 @@
-import { ANGLE_PER_NOTE } from "./types";
+import { NOTES_PER_OCTAVE } from "../data/intervals";
+
+export const ANGLE_PER_NOTE = 360 / NOTES_PER_OCTAVE;
 
 const outerR = 170;
 const innerR = 110;
@@ -37,6 +39,13 @@ interface WedgePathOptions {
   cornerStroke?: number;
   uniformGap?: number;
 }
+
+export const INNER_WEDGE_OPTIONS: WedgePathOptions = {
+  outerR: RING_CONFIG.innerWedgeOuterR,
+  innerR: RING_CONFIG.innerWedgeInnerR,
+  cornerStroke: RING_CONFIG.innerCornerStroke,
+  uniformGap: RING_CONFIG.innerUniformGap,
+};
 
 export function wedgePath(i: number, options: WedgePathOptions = {}): string {
   const {
@@ -79,6 +88,9 @@ export function wedgePath(i: number, options: WedgePathOptions = {}): string {
     "Z",
   ].join(" ");
 }
+
+export const innerWedgePath = (i: number, extra: WedgePathOptions = {}): string =>
+  wedgePath(i, { ...INNER_WEDGE_OPTIONS, ...extra });
 
 export function polarPercent(angleDeg: number, radius: number) {
   const rad = degToRad(angleDeg);

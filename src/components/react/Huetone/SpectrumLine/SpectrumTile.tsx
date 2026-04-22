@@ -1,14 +1,10 @@
-import { notes } from "../data/notes";
-import type { Degree } from "../data/spectrum";
 import { mod } from "../../../../math/mod";
-import DegreeLabel from "../primitives/DegreeLabel";
-import NoteLabel from "../primitives/NoteLabel";
-import {
-  HOVER_DIM_GROUP,
-  INACTIVE_BG_CLASS,
-  NOTES_PER_OCTAVE,
-  transformTransition,
-} from "../primitives/types";
+import { NOTES_PER_OCTAVE } from "../data/intervals";
+import { notes } from "../data/notes";
+import type { Degree } from "../data/palettes";
+import { HOVER_DIM_GROUP, INACTIVE_BG_CLASS, transformTransition } from "../theme";
+import DegreeLabel from "../ui/DegreeLabel";
+import NoteLabel from "../ui/NoteLabel";
 import { STRIP_CENTER, STRIP_SLOTS } from "./stripConstants";
 
 interface Props {

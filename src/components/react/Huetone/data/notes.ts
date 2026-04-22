@@ -11,4 +11,4 @@ export const notes = [
   "Gb/F#",
   "G",
   "Ab/G#",
-];
+] as const;

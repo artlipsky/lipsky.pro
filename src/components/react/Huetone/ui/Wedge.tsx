@@ -1,5 +1,5 @@
-import type { Degree } from "../data/spectrum";
-import { HOVER_DIM, INACTIVE_FILL_VAR } from "./types";
+import type { Degree } from "../data/palettes";
+import { HOVER_DIM, INACTIVE_FILL_VAR } from "../theme";
 
 interface Props {
   step: Degree;

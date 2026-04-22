@@ -1,7 +1,6 @@
 import { notes } from "../data/notes";
-import NoteLabel from "./NoteLabel";
-import { polarPercent, RING_CONFIG, RING_START_ANGLE } from "./ringGeometry";
-import { ANGLE_PER_NOTE } from "./types";
+import NoteLabel from "../ui/NoteLabel";
+import { ANGLE_PER_NOTE, polarPercent, RING_CONFIG, RING_START_ANGLE } from "./ringGeometry";
 
 interface Props {
   clipPathId: string;

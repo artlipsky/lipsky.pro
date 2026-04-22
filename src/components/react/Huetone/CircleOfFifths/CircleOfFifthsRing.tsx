@@ -1,27 +1,28 @@
 import { useId } from "react";
 import { mod } from "../../../../math/mod";
-import { FIFTHS_ORDER } from "../data/fifths";
-import { spectrum } from "../data/spectrum";
 import {
   FIFTH_SEMITONES,
+  FIFTHS_ORDER,
+  NOTES_PER_OCTAVE,
   RELATIVE_MAJOR_SHIFT,
   RELATIVE_MINOR_SHIFT,
-} from "../primitives/intervals";
-import { getKeyNotation } from "../primitives/keyNotation";
-import RingClip from "../primitives/RingClip";
-import RingDegreesLayer from "../primitives/RingDegreesLayer";
-import RingNotesLayer from "../primitives/RingNotesLayer";
-import ViewLabel from "../primitives/ViewLabel";
-import Wedge from "../primitives/Wedge";
-import { RING_CONFIG, RING_VIEWBOX, wedgePath } from "../primitives/ringGeometry";
+} from "../data/intervals";
+import { getKeyNotation } from "../data/keyNotation";
+import RingClip from "../ring/RingClip";
+import RingDegreesLayer from "../ring/RingDegreesLayer";
+import RingNotesLayer from "../ring/RingNotesLayer";
 import {
   ANGLE_PER_NOTE,
-  NOTES_PER_OCTAVE,
-  transformTransition,
-  type Mode,
-  type ViewProps,
-} from "../primitives/types";
-import WheelArea from "../primitives/WheelArea";
+  innerWedgePath,
+  RING_CONFIG,
+  RING_VIEWBOX,
+  wedgePath,
+} from "../ring/ringGeometry";
+import { transformTransition } from "../theme";
+import type { Mode, ViewProps } from "../types";
+import ViewLabel from "../ui/ViewLabel";
+import Wedge from "../ui/Wedge";
+import WheelArea from "../ui/WheelArea";
 
 interface Props extends ViewProps {
   mode?: Mode;
@@ -29,6 +30,7 @@ interface Props extends ViewProps {
 }
 
 export default function CircleOfFifthsRing({
+  spectrum,
   offset,
   animating,
   inScale,
@@ -47,20 +49,11 @@ export default function CircleOfFifthsRing({
   const tonicChromatic = mod(offset * FIFTH_SEMITONES, NOTES_PER_OCTAVE);
   const notation = getKeyNotation(tonicChromatic, mode === "minor");
 
-  const innerShift = mode === "minor" ? RELATIVE_MAJOR_SHIFT : RELATIVE_MINOR_SHIFT;
-  const outerLabel = (j: number) => (mode === "minor" ? notation.minor(j) : notation.major(j));
-  const innerLabel = (j: number) => {
-    const idx = mod(j + innerShift, NOTES_PER_OCTAVE);
-    return mode === "minor" ? notation.major(idx) : notation.minor(idx);
-  };
-
-  const innerWedgePath = (i: number) =>
-    wedgePath(i, {
-      outerR: RING_CONFIG.innerWedgeOuterR,
-      innerR: RING_CONFIG.innerWedgeInnerR,
-      cornerStroke: RING_CONFIG.innerCornerStroke,
-      uniformGap: RING_CONFIG.innerUniformGap,
-    });
+  const isMinor = mode === "minor";
+  const innerShift = isMinor ? RELATIVE_MAJOR_SHIFT : RELATIVE_MINOR_SHIFT;
+  const outerAt = isMinor ? notation.minor : notation.major;
+  const innerAt = isMinor ? notation.major : notation.minor;
+  const innerLabel = (j: number) => innerAt(mod(j + innerShift, NOTES_PER_OCTAVE));
 
   return (
     <WheelArea onWheel={onWheel} className={`relative w-80 md:w-120 aspect-square ${className ?? ""}`}>
@@ -103,7 +96,7 @@ export default function CircleOfFifthsRing({
         rotationDeg={rotationDeg}
         transition={transition}
         positionOf={(j) => FIFTHS_ORDER[j]}
-        label={outerLabel}
+        label={outerAt}
       />
       <RingNotesLayer
         clipPathId={clipPathId}
@@ -114,7 +107,7 @@ export default function CircleOfFifthsRing({
         label={innerLabel}
       />
 
-      <RingDegreesLayer order={FIFTHS_ORDER} />
+      <RingDegreesLayer order={FIFTHS_ORDER} info={spectrum} />
 
       {label && (
         <div className="absolute inset-0 flex justify-center items-center px-8 pointer-events-none">

@@ -1,5 +1,5 @@
+import type { Mode } from "../types";
 import Dropdown, { type DropdownItem } from "./Dropdown";
-import type { Mode } from "./types";
 
 interface Props {
   value: Mode;
