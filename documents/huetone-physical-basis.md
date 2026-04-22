@@ -10,16 +10,24 @@ A musical octave is, precisely, a doubling of frequency: `A4 = 440 Hz`, `A5 = 88
 
 The visible spectrum runs from roughly `428 THz` (deep red) to `789 THz` (deep violet). The ratio is `789 / 428 ≈ 1.84` — just shy of two. We see almost exactly one octave of light. The next "octave up" from red is ultraviolet; the next "octave down" from violet is infrared.
 
-This is the structural fact Huetone rests on. The visible rainbow isn't an arbitrary stretch of frequencies — it is a single octave of the same wave phenomenon that gives us musical octaves.
+The visible rainbow isn't an arbitrary stretch of frequencies — it is a single octave of the same wave phenomenon that gives us musical octaves. That coincidence makes the pitch↔colour parallel physically grounded rather than metaphorical.
+
+## The colour wheel isn't the spectrum
+
+The visible spectrum is linear: `428 THz` at one end, `789 THz` at the other. The colour wheel Huetone draws from is a circle — red loops back to red through purples and magentas that don't correspond to any single wavelength of light. They are perceptual mixtures, a product of trichromatic vision that our eyes read as a smooth join. Huetone borrows the wheel's *closed* topology from colour perception; the fact that the visible band spans roughly one octave in frequency is a separate, independently true claim. The mapping works because both hold — not because the spectrum itself curves into a loop.
 
 ## Why measure in frequency, not wavelength
 
-Frequency is the physically fundamental quantity. It does not change when light enters a denser medium; wavelength does. The energy of a photon is `E = hf`, proportional to frequency. Sound behaves the same way: a note's identity is its frequency, not the wavelength of the pressure wave, which depends on the speed of sound in the medium it travels through.
+Frequency is the physically fundamental quantity. It does not change when light enters a denser medium; wavelength does. The energy of a photon is `E = hf`, proportional to frequency. Sound behaves the same way: a note's identity is its frequency, not the wavelength of the pressure wave, which depends on the speed of sound in the medium it travels through. Every ratio Huetone uses — octave, fifth, third, tritone — is a ratio of frequencies.
 
-When we say "the visible spectrum is an octave", we mean it in frequency space. The same is true of every claim about how the colour wheel divides — equal hue steps correspond to equal log-frequency steps, the same way the twelve equal-tempered semitones partition a musical octave.
+## Consonance from the harmonic series
 
-## Twelve into twelve
+Any steady tone carries a stack of overtones — integer multiples of its fundamental. The second harmonic lies an octave above it (`2:1`); the third, a perfect fifth above that octave (`3:2` within an octave); the fifth gives a major third (`5:4`); and so on up the series. These ratios aren't a convention — they fall out of the physics of a vibrating string or a column of air.
 
-The chromatic scale divides the musical octave into twelve equal-tempered semitones — each step is a frequency ratio of `2^(1/12) ≈ 1.0595`. Huetone divides the octave of visible light into twelve hue steps and binds each one to a scale degree.
+Two pitches sound consonant when the ratio between them is built from small integers drawn from this series; dissonance grows as the ratios become more complex. That gives every interval in the chromatic scale a place on a consonance ranking. The tonic (`1/1`) leads, followed by the perfect fifth (`3/2`) and perfect fourth (`4/3`), then the major sixth and major third (`5/3`, `5/4`), the minor third and minor sixth (`6/5`, `8/5`), the major second and minor seventh (`9/8`, `9/5`), the major seventh and minor second (`15/8`, `16/15`), and finally the tritone (`45/32`) — the most complex ratio of the twelve.
 
-The result is a literal translation, not a styled assignment. The tritone — six semitones from the tonic, half an octave away in frequency — lands on a hue half a hue-wheel away from the tonic's colour. The geometric structure of one octave is preserved across the mapping. The relationships between degrees in music are mirrored by the relationships between hues in vision, because both are the same arithmetic performed on the same kind of object: a single octave, divided in twelve.
+## Hue distance encodes consonance
+
+Huetone assigns each of the twelve Tailwind hues to a scale degree — not in chromatic order, but in order of consonance. The tonic takes red. The perfect fifth and perfect fourth — the two most consonant intervals — sit one hue step away, on either side of red (orange and pink). The major third and sixth sit two steps out, the minor third and sixth three, the seconds and sevenths further still. The tritone, the most dissonant interval, lands diametrically opposite the tonic — cyan, half a colour wheel from red.
+
+The result is that the *colour* relationship between two degrees mirrors the *aural* relationship between the two pitches. Chords built on consonant intervals read as tight clusters of neighbouring hues; dissonant chords splay across the wheel. Colour consonance now carries pitch consonance — harmony you can see.

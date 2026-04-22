@@ -88,9 +88,29 @@ const formulaClasses = "bg-foreground/10 mx-0.5 px-1.5 py-0.5 rounded font-mono 
           violet is infrared.
         </p>
         <p class="text-muted text-base md:text-lg leading-relaxed">
-          This is the structural fact Huetone rests on. The visible rainbow
-          isn't an arbitrary stretch of frequencies — it is a single octave of
-          the same wave phenomenon that gives us musical octaves.
+          The visible rainbow isn't an arbitrary stretch of frequencies — it is
+          a single octave of the same wave phenomenon that gives us musical
+          octaves. That coincidence makes the pitch↔colour parallel physically
+          grounded rather than metaphorical.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="font-medium text-lg md:text-xl text-balance">
+          The colour wheel isn't the spectrum
+        </h3>
+        <p class="text-muted text-base md:text-lg leading-relaxed">
+          The visible spectrum is linear:
+          <code class={formulaClasses}>428 THz</code> at one end,
+          <code class={formulaClasses}>789 THz</code> at the other. The colour
+          wheel Huetone draws from is a circle — red loops back to red through
+          purples and magentas that don't correspond to any single wavelength
+          of light. They are perceptual mixtures, a product of trichromatic
+          vision that our eyes read as a smooth join. Huetone borrows the
+          wheel's <em>closed</em> topology from colour perception; the fact
+          that the visible band spans roughly one octave in frequency is a
+          separate, independently true claim. The mapping works because both
+          hold — not because the spectrum itself curves into a loop.
         </p>
       </div>
 
@@ -104,36 +124,66 @@ const formulaClasses = "bg-foreground/10 mx-0.5 px-1.5 py-0.5 rounded font-mono 
           photon is <code class={formulaClasses}>E = hf</code>, proportional to frequency. Sound
           behaves the same way: a note's identity is its frequency, not the
           wavelength of the pressure wave, which depends on the speed of sound
-          in the medium it travels through.
-        </p>
-        <p class="text-muted text-base md:text-lg leading-relaxed">
-          When we say "the visible spectrum is an octave", we mean it in
-          frequency space. The same is true of every claim about how the colour
-          wheel divides — equal hue steps correspond to equal log-frequency
-          steps, the same way the twelve equal-tempered semitones partition a
-          musical octave.
+          in the medium it travels through. Every ratio Huetone uses — octave,
+          fifth, third, tritone — is a ratio of frequencies.
         </p>
       </div>
 
       <div class="flex flex-col gap-3">
         <h3 class="font-medium text-lg md:text-xl text-balance">
-          Twelve into twelve
+          Consonance from the harmonic series
         </h3>
         <p class="text-muted text-base md:text-lg leading-relaxed">
-          The chromatic scale divides the musical octave into twelve
-          equal-tempered semitones — each step is a frequency ratio of
-          <code class={formulaClasses}>2<sup class="text-xs">1/12</sup> ≈ 1.0595</code>. Huetone divides the octave of visible
-          light into twelve hue steps and binds each one to a scale degree.
+          Any steady tone carries a stack of overtones — integer multiples of
+          its fundamental. The second harmonic lies an octave above it
+          (<code class={formulaClasses}>2:1</code>); the third, a perfect fifth
+          above that octave (<code class={formulaClasses}>3:2</code> within an
+          octave); the fifth gives a major third
+          (<code class={formulaClasses}>5:4</code>); and so on up the series.
+          These ratios aren't a convention — they fall out of the physics of a
+          vibrating string or a column of air.
         </p>
         <p class="text-muted text-base md:text-lg leading-relaxed">
-          The result is a literal translation, not a styled assignment. The
-          tritone — six semitones from the tonic, half an octave away in
-          frequency — lands on a hue half a hue-wheel away from the tonic's
-          colour. The geometric structure of one octave is preserved across the
-          mapping. The relationships between degrees in music are mirrored by
-          the relationships between hues in vision, because both are the same
-          arithmetic performed on the same kind of object: a single octave,
-          divided in twelve.
+          Two pitches sound consonant when the ratio between them is built from
+          small integers drawn from this series; dissonance grows as the ratios
+          become more complex. That gives every interval in the chromatic scale
+          a place on a consonance ranking. The tonic
+          (<code class={formulaClasses}>1/1</code>) leads, followed by the
+          perfect fifth (<code class={formulaClasses}>3/2</code>) and perfect
+          fourth (<code class={formulaClasses}>4/3</code>), then the major sixth
+          and major third (<code class={formulaClasses}>5/3</code>,
+          <code class={formulaClasses}>5/4</code>), the minor third and minor
+          sixth (<code class={formulaClasses}>6/5</code>,
+          <code class={formulaClasses}>8/5</code>), the major second and minor
+          seventh (<code class={formulaClasses}>9/8</code>,
+          <code class={formulaClasses}>9/5</code>), the major seventh and minor
+          second (<code class={formulaClasses}>15/8</code>,
+          <code class={formulaClasses}>16/15</code>), and finally the tritone
+          (<code class={formulaClasses}>45/32</code>) — the most complex ratio
+          of the twelve.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h3 class="font-medium text-lg md:text-xl text-balance">
+          Hue distance encodes consonance
+        </h3>
+        <p class="text-muted text-base md:text-lg leading-relaxed">
+          Huetone assigns each of the twelve Tailwind hues to a scale degree —
+          not in chromatic order, but in order of consonance. The tonic takes
+          red. The perfect fifth and perfect fourth — the two most consonant
+          intervals — sit one hue step away, on either side of red (orange and
+          pink). The major third and sixth sit two steps out, the minor third
+          and sixth three, the seconds and sevenths further still. The tritone,
+          the most dissonant interval, lands diametrically opposite the
+          tonic — cyan, half a colour wheel from red.
+        </p>
+        <p class="text-muted text-base md:text-lg leading-relaxed">
+          The result is that the <em>colour</em> relationship between two
+          degrees mirrors the <em>aural</em> relationship between the two
+          pitches. Chords built on consonant intervals read as tight clusters of
+          neighbouring hues; dissonant chords splay across the wheel. Colour
+          consonance now carries pitch consonance — harmony you can see.
         </p>
       </div>
     </article>
