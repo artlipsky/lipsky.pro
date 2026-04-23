@@ -1,16 +1,217 @@
 ---
-import { Image } from "astro:assets";
-import logo from "../../assets/logo.svg";
-
 interface Props {
   class?: string;
 }
 
 const { class: className } = Astro.props;
+
+const outerPath =
+  "M3.84536 154.591L0 168H23.8881L27.7334 154.591H3.84536ZM92.2666 154.591L96.112 168H120L116.155 154.591H92.2666ZM113.893 146.704L107.936 125.934H84.0481L35.9519 125.934L71.8203 0H48.1797L6.1073 146.704H113.893ZM76.203 15.2825L64.3 57.074L81.786 118.047H105.674L76.203 15.2825Z";
+const foot1 = "M3.84536 154.591L0 168H23.8881L27.7334 154.591Z";
+const foot2 = "M92.2666 154.591L96.112 168H120L116.155 154.591Z";
+const body =
+  "M113.893 146.704L107.936 125.934H84.0481L35.9519 125.934L71.8203 0H48.1797L6.1073 146.704Z";
+const inner = "M76.203 15.2825L64.3 57.074L81.786 118.047H105.674Z";
 ---
 
-<Image
-  src={logo}
-  alt="lipsky.pro"
-  class:list={["h-auto w-full", className]}
-/>
+<div class:list={["logo-stage", className]} aria-label="lipsky.pro" role="img">
+  <svg
+    class="logo-svg"
+    viewBox="0 0 120 168"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+  >
+    <defs>
+      <linearGradient
+        id="logo-sheen-grad"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0"
+      >
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0"></stop>
+        <stop offset="0.2" stop-color="#ffffff" stop-opacity="0"></stop>
+        <stop offset="0.5" stop-color="#ffffff" stop-opacity="1"></stop>
+        <stop offset="0.8" stop-color="#ffffff" stop-opacity="0"></stop>
+        <stop offset="1" stop-color="#ffffff" stop-opacity="0"></stop>
+      </linearGradient>
+
+      <clipPath id="logo-clip" clipPathUnits="userSpaceOnUse">
+        <path d={outerPath} fill-rule="evenodd" clip-rule="evenodd"></path>
+      </clipPath>
+    </defs>
+
+    <g class="logo-trace" clip-path="url(#logo-clip)">
+      <path class="logo-path p-body" pathLength="1" d={body}></path>
+      <path class="logo-path p-inner" pathLength="1" d={inner}></path>
+      <path class="logo-path p-foot1" pathLength="1" d={foot1}></path>
+      <path class="logo-path p-foot2" pathLength="1" d={foot2}></path>
+    </g>
+
+    <path
+      class="logo-fill"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d={outerPath}
+      fill="#ffffff"
+      fill-opacity="0.82"></path>
+
+    <g class="logo-sheen" clip-path="url(#logo-clip)">
+      <rect
+        class="logo-sheen-rect"
+        x="-80"
+        y="-20"
+        width="80"
+        height="220"
+        fill="url(#logo-sheen-grad)"></rect>
+    </g>
+  </svg>
+</div>
+
+<style>
+  .logo-stage {
+    display: block;
+    width: 100%;
+    animation: logo-enter 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .logo-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    filter: drop-shadow(0 0 22px rgba(255, 255, 255, 0.18));
+  }
+
+  .logo-path {
+    fill: none;
+    stroke: #ffffff;
+    stroke-width: 4;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 1;
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.9))
+      drop-shadow(0 0 12px rgba(180, 220, 255, 0.55));
+    animation:
+      logo-draw 0.8s cubic-bezier(0.77, 0, 0.175, 1) forwards,
+      logo-stroke-fade 0.5s ease-out 1.5s forwards;
+  }
+
+  .p-body {
+    animation-delay: 0s, 1.5s;
+  }
+  .p-inner {
+    animation-delay: 0.35s, 1.5s;
+  }
+  .p-foot1 {
+    animation-delay: 0.55s, 1.5s;
+  }
+  .p-foot2 {
+    animation-delay: 0.7s, 1.5s;
+  }
+
+  .logo-fill {
+    opacity: 0;
+    fill-opacity: 0.82;
+    transform-origin: 60px 84px;
+    animation:
+      logo-fill-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.5s forwards,
+      logo-fill-brighten 0.55s ease-out 3.5s forwards;
+  }
+
+  .logo-sheen {
+    opacity: 0;
+    animation: logo-sheen-on 0.01s linear 2.4s forwards;
+  }
+
+  .logo-sheen-rect {
+    transform-box: fill-box;
+    transform-origin: center;
+    transform: rotate(18deg) translate3d(-160px, 0, 0);
+    animation: logo-sheen-sweep 1.9s cubic-bezier(0.25, 0.8, 0.35, 1) 2.4s
+      forwards;
+  }
+
+  @keyframes logo-enter {
+    0% {
+      transform: scale(1.35);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes logo-draw {
+    0% {
+      stroke-dashoffset: 1;
+    }
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes logo-stroke-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes logo-fill-in {
+    0% {
+      opacity: 0;
+      transform: scale(1.04);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes logo-sheen-on {
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes logo-sheen-sweep {
+    0% {
+      transform: rotate(18deg) translate3d(-160px, 0, 0);
+    }
+    100% {
+      transform: rotate(18deg) translate3d(260px, 0, 0);
+    }
+  }
+
+  @keyframes logo-fill-brighten {
+    to {
+      fill-opacity: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .logo-stage,
+    .logo-path,
+    .logo-fill,
+    .logo-sheen,
+    .logo-sheen-rect {
+      animation: none !important;
+    }
+    .logo-path {
+      opacity: 0;
+    }
+    .logo-fill {
+      opacity: 1;
+      fill-opacity: 1;
+    }
+    .logo-stage {
+      opacity: 1;
+      transform: none;
+      filter: none;
+    }
+  }
+</style>
