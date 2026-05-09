@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { mod } from "../../../../math/mod";
 import { CHORD_INFO } from "../data/degrees";
 import {
@@ -9,6 +9,7 @@ import {
   RELATIVE_MAJOR_SHIFT,
   RELATIVE_MINOR_SHIFT,
 } from "../data/intervals";
+import { scales } from "../data/scales";
 import { useCarouselOffset } from "../state/useCarouselOffset";
 import { usePalette } from "../state/usePalette";
 import type { Mode } from "../types";
@@ -26,6 +27,11 @@ export default function CircleOfFifthsStage({ className }: Props) {
   const { paletteId, setPaletteId, spectrum } = usePalette(CHORD_INFO);
   const { offset, animating, handleWheel, shift, jumpTo } = useCarouselOffset();
   const tonicIndex = chromaticFromFifthsOffset(offset);
+
+  const inScale = useCallback(
+    (i: number) => scales.find((s) => s.id === mode)?.degrees.includes(i) ?? true,
+    [mode],
+  );
 
   const handleTonicChange = (idx: number) => {
     jumpTo(fifthsOffsetFromChromatic(idx));
@@ -50,6 +56,7 @@ export default function CircleOfFifthsStage({ className }: Props) {
         spectrum={spectrum}
         offset={offset}
         animating={animating}
+        inScale={inScale}
         mode={mode}
         onShiftBy={shift}
         onInnerClick={handleInnerClick}
